@@ -1,24 +1,29 @@
 import React, {Component} from 'react';
+import VolcanList from './VolcanList';
+import * as volcanoes from './volcanoes.json';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-  this.state = {
-    map: '',
-  };
-}
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      map: '',
+      markers: [],
+      island: volcanoes,
+      infoWindow: false,
+      contenu: ''
+    }
+  }
   componentDidMount() {
     window.initMap = this.initMap;
     openGmap('https://maps.googleapis.com/maps/api/js?key=AIzaSyBjJdrQgRfSMEpE0_uW6ADz0DwPKoO_bEw&callback=initMap');
   }
 
   initMap = () => {
-
+    const {island, markers} = this.state;
+    console.log(island);
+    console.log(markers);
     //define variables
-    var markers = [];
-    var volcanoList = [];
-    var volcan = document.getElementById('list');
     var styles = [
       {
           "featureType": "all",
@@ -261,19 +266,6 @@ class App extends Component {
           ]
       }
     ]
-    var island = [
-      {title: 'Eyjafjallajökull Volcano ', location: {lat: 63.63040460000001, lng: -19.606733299999973}},
-      {title: 'Katla Volcano ', location: {lat: 63.6467299, lng: -19.130284699999947}},
-      {title: 'Hverfjall Volcano ', location: {lat: 65.60861109999999, lng: -16.87166669999999}},
-      {title: 'Kerlingarfjöll Volcano ', location: {lat: 64.6365932, lng: -19.26943959999994}},
-      {title: 'Öræfajökull Volcano ', location: {lat: 63.98217380000001, lng: -16.653642799999943}},
-      {title: 'Grímsnes Volcano ', location: {lat: 64.033333, lng: -20.866667000000007}},
-      {title: 'Eldfell Volcano ', location: {lat: 63.4325, lng: -20.247499999999945}}
-    ];
-    var largeInfowindow = new window.google.maps.InfoWindow();
-    //var defaultIcon = makeMarkerIcon('0091ff');
-    //var highlightedIcon = makeMarkerIcon('367f39');
-
     // Constructor creates a new map
     let map = new window.google.maps.Map(document.getElementById('map'), {
        zoom: 6,
@@ -289,6 +281,7 @@ class App extends Component {
       // Get the position from the location array
       var position = island[i].location;
       var title = island[i].title;
+      var id = island[i].key;
 
       // Create a marker per location, and put into markers array.
       var marker = new window.google.maps.Marker({
@@ -297,60 +290,48 @@ class App extends Component {
         title: title,
         animation: window.google.maps.Animation.DROP,
         //icon: defaultIcon,
-        id: i
+        id: id
       });
+
       markers.push(marker);
       console.log(marker.title);
-      volcanoList.push(marker.title);
 
-      // display markers
-      for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
-      };
-
-
-      // Create an onclick event to open an infowindow at each marker.
-      //marker.addListener('click', function() {
-      //  populateInfoWindow(this, largeInfowindow);
-      //});
-
-      // to change the colors back and forth.
-      //marker.addListener('mouseover', function() {
-      //  this.setIcon(highlightedIcon);
-      //});
-      //marker.addListener('mouseout', function() {
-      //  this.setIcon(defaultIcon);
-      //});
+      marker.addListener('click', function(){
+        this.displayIF(marker);
+      })
     }
 
+      marker.addListener('click', function(){
+        this.closeIF();
+      })
 
   };
 
-  // displays content of the infoWindow
-  populateInfoWindow = (marker, infowindow) => {
-    // Check to make sure the infowindow is not already opened on this marker.
-    if (infowindow.marker != marker) {
-      infowindow.marker = marker;
-      infowindow.setContent('<div>' + marker.title + marker.position + '</div>');
-      infowindow.open(map, marker);
-      // Make sure the marker property is cleared if the infowindow is closed.
-      infowindow.addListener('closeclick', function() {
-        infowindow.marker = null;
-      });
-    }
+  displayIF = (marker) => {
+    this.setState({
+      infoWindow: true,
+      contenu: 'yoyoyo'
+    })
   }
 
-
+  closeIF = (marker) => {
+    this.setState({
+      infoWindow: false
+    })
+  }
 
 render() {
   return (
     <div className="App">
+      <VolcanList
+        volcano={this.state.island}
+        markers={this.state.markers}
+        openIF={this.openIF}
+        />
       <div id="map" role="application"></div>
-
     </div>
   )
 }
-
 
 }
 

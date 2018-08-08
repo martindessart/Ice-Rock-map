@@ -1,0 +1,44 @@
+[
+  {
+    "key": "A",
+    "name": "Eyj",
+    "title": "Eyjafjallajökull Volcano",
+    "position": {"lat": 63.63040460000001, "lng": -19.606733299999973}
+  },
+  {
+    "key": "B",
+    "name": "Kat",
+    "title": "Katla Volcano",
+    "position": {"lat": 63.6467299, "lng": -19.130284699999947}
+  },
+  {
+    "key": "C",
+    "name": "Hve",
+    "title": "Hverfjall Volcano",
+    "position": {"lat": 65.60861109999999, "lng": -16.87166669999999}
+  },
+  {
+    "key": "D",
+    "name": "Ker",
+    "title": "Kerlingarfjöll Volcano",
+    "position": {"lat": 64.6365932, "lng": -19.26943959999994}
+  },
+  {
+    "key": "E",
+    "name": "Ora",
+    "title": "Öræfajökull Volcano",
+    "position": {"lat": 63.98217380000001, "lng": -16.653642799999943}
+  },
+  {
+    "key": "F",
+    "name": "Gri",
+    "title": "Grímsnes Volcano",
+    "position": {"lat": 64.033333, "lng": -20.866667000000007}
+  },
+  {
+    "key": "G",
+    "name": "Eld",
+    "title": "Eldfell Volcano",
+    "position": {"lat": 63.4325, "lng": -20.247499999999945}
+  }
+]
