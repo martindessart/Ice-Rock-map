@@ -34,28 +34,3 @@ h1 {
   position: absolute;
   right: 0px;
 }
-
-.options-box {
-  background: #fff;
-  border: 1px solid #999;
-  border-radius: 3px;
-  height: 100%;
-  line-height: 35px;
-  padding: 10px 0 30px 0;
-  text-align: left;
-  width: 25%;
-}
-
-.list-text {
-  display: block;
-  width: 100%;
-  font-size: 1em;
-  padding: 1em;
-}
-#research-text {
-  width: 20%;
-}
-
-#research-input {
-  width: 2,5%;
-}

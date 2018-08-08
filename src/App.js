@@ -9,9 +9,11 @@ class App extends Component {
     this.state = {
       map: '',
       markers: [],
+      selected:{},
       island: volcanoes,
-      infoWindow: false,
+      infoWindowState: false,
       contenu: ''
+
     }
   }
   componentDidMount() {
@@ -23,6 +25,7 @@ class App extends Component {
     const {island, markers} = this.state;
     console.log(island);
     console.log(markers);
+    var largeInfoWindow = new window.google.maps.InfoWindow();
     //define variables
     var styles = [
       {
@@ -278,8 +281,8 @@ class App extends Component {
      });
 
     for (var i = 0; i < island.length; i++) {
-      // Get the position from the location array
-      var position = island[i].location;
+      // Get the position from the "volcanoes" array from json file
+      var position = island[i].position;
       var title = island[i].title;
       var id = island[i].key;
 
@@ -297,7 +300,8 @@ class App extends Component {
       console.log(marker.title);
 
       marker.addListener('click', function(){
-        this.displayIF(marker);
+        console.log(marker.title);
+        //displayIF(marker);
       })
     }
 
@@ -308,15 +312,18 @@ class App extends Component {
   };
 
   displayIF = (marker) => {
-    this.setState({
-      infoWindow: true,
-      contenu: 'yoyoyo'
-    })
+    //this.setState({
+      //infoWindowState: true,
+      //selected: marker,
+      //contenu: 'yoyoyo'
+    //})
+    console.log('yoyo');
   }
 
   closeIF = (marker) => {
     this.setState({
-      infoWindow: false
+      infoWindowState: false,
+      selected: {}
     })
   }
 
