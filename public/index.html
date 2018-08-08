@@ -1,0 +1,31 @@
+<html>
+ <head>
+
+   <style type="text/css">
+     html, body { height: 100%; margin: 0; padding: 0; }
+     #map { height: 100%; }
+   </style>
+ </head>
+ <body>
+  <div id="root">
+   <div id="map"></div>
+  </div>
+   <script>
+     function initMap() {
+       var map = new google.maps.Map(document.getElementById('map'), {
+         zoom: 17,
+         center: {lat: 64.126, lng: -21.817}
+       });
+      var island = {lat: 64.126, lng: -21.817};
+      var marker = new google.maps.Marker({
+        position: island,
+        map: map,
+        title:'this country rocks'
+      })
+     }
+     </script>
+     <script async defer
+      src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBjJdrQgRfSMEpE0_uW6ADz0DwPKoO_bEw&callback=initMap">
+     </script>
+ </body>
+</html>
