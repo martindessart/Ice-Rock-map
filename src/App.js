@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import VolcanList from './VolcanList';
+import Tumblr from './Tumblr';
 import * as volcanoes from './volcanoes.json';
+
 
 class App extends Component {
 
@@ -13,7 +15,6 @@ class App extends Component {
       island: volcanoes,
       infoWindowState: false,
       contenu: ''
-
     }
   }
   componentDidMount() {
@@ -25,8 +26,7 @@ class App extends Component {
     const {island, markers} = this.state;
     console.log(island);
     console.log(markers);
-    var largeInfoWindow = new window.google.maps.InfoWindow();
-    //define variables
+    var appComponent = this;
     var styles = [
       {
           "featureType": "all",
@@ -276,6 +276,7 @@ class App extends Component {
        styles: styles,
        //mapTypeControl: false
      });
+
      this.setState({
        map
      });
@@ -297,34 +298,31 @@ class App extends Component {
       });
 
       markers.push(marker);
-      console.log(marker.title);
 
       marker.addListener('click', function(){
         console.log(marker.title);
-        //displayIF(marker);
+        console.log(this);
+        //appComponent.this.closeIF(marker);
       })
-    }
+
+
+    } //for loop end
+
+
 
       marker.addListener('click', function(){
         this.closeIF();
       })
 
-  };
+  }; //init map end
 
-  displayIF = (marker) => {
-    //this.setState({
-      //infoWindowState: true,
-      //selected: marker,
-      //contenu: 'yoyoyo'
-    //})
-    console.log('yoyo');
-  }
 
   closeIF = (marker) => {
     this.setState({
       infoWindowState: false,
       selected: {}
     })
+    console.log('closed');
   }
 
 render() {

@@ -10,7 +10,7 @@ class VolcanList extends Component {
       resultMarker: [],
       selected: {},
       resultVolcano: volcanoes,
-      listDisplay: true
+      listDisplay: true,
     }
   }
 
@@ -69,19 +69,11 @@ class VolcanList extends Component {
     }
 
     changeListState = () => {
-      if (this.listDisplay === true) {
-        this.setState({
-          listDisplay : false
-        })
-        console.log(this.listDisplay);
-      }
-        else {
-          this.setState({
-            listDisplay : true
-          })
-          console.log('yyo'+this.listDisplay);
-        }
-      }
+      this.setState((prevState) => ({
+        listDisplay: !(prevState.listDisplay)
+      })
+    );
+    };
 
   render() {
     const { query, resultVolcano, listDisplay } = this.state;
@@ -92,16 +84,16 @@ class VolcanList extends Component {
 
         <form className="container-form">
 
-        <button className="container-btn"
-        onClick={() => this.changeListState()}>
-        Volcanoes</button>
+          <button className="container-btn"
+          onClick={() => this.changeListState()}>
+          Volcanoes</button>
 
-        <input className="container-input"
-        type="text"
-        placeholder="Ex: Hverfjall..."
-        value={query}
-        onChange={(event) => this.updateQuery(event.target.value)}
-        />
+          <input className="container-input"
+          type="text"
+          placeholder="Ex: Hverfjall..."
+          value={query}
+          onChange={(event) => this.updateQuery(event.target.value)}
+          />
         </form>
 
         {listDisplay &&
