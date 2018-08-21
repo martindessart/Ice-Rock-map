@@ -33,7 +33,14 @@ class VolcanList extends Component {
       this.handleVolcanoes(query);
   }
 
+  updateList = () => {
+    this.setState((prevState) => ({
+      listDisplay: !(prevState.listDisplay)
+    }));
+  }
+
     handleVolcanoes = (query) => {
+      let appComponent = this;
       let newMarkers;
       let newVolcano;
       if (query) {
@@ -42,9 +49,12 @@ class VolcanList extends Component {
         newVolcano = this.props.volcano.filter(volcan =>
         match.test(volcan.title)
         );
+        console.log(newVolcano);
         newMarkers = this.props.markers.filter(marker =>
         match.test(marker.title)
         );
+        console.log(newMarkers);
+
         this.setState({
         resultMarkers: newMarkers,
         resultVolcano: newVolcano
@@ -59,33 +69,49 @@ class VolcanList extends Component {
 
       this.props.markers.map(marker => marker.setVisible(false));
       setTimeout(function() {
-        this.props.markers.map(marker =>
-        this.handleMarker(marker))
+        appComponent.props.markers.map(marker =>
+        appComponent.displayMarker(marker))
       }, 200)
     }
 
-    handleMarker = (marker) => {
-      this.state.resultMarker.map(resultMarker => resultMarker.id === marker.id && marker.setVisible(true))
+    displayMarker = (marker) => {
+      this.state.resultMarker.map(resultMarker => resultMarker.id === marker.id && marker.setVisible(true));
+      console.log(marker);
     }
 
-    changeListState = () => {
-      this.setState((prevState) => ({
-        listDisplay: !(prevState.listDisplay)
-      })
-    );
-    };
+    handleMarker = (volcan) => {
+      var appComponent = this;
+      //animation part
+      this.addMarker(volcan);
+      setTimeout(function() {
+        appComponent.props.displayIF(
+          appComponent.state.selected
+        );
+      }, 200)
+    }
+
+    addMarker = (volcan) => {
+      this.state.resultMarker.map(resultMarker =>
+      resultMarker.id === volcan.key &&
+    this.setState({
+      selected: resultMarker
+    })
+  )
+}
+
 
   render() {
     const { query, resultVolcano, listDisplay } = this.state;
 
     return (
-      <div className="container">
+      <section className="container">
         <h1>FIND A CRAZY ROCKY PLACE</h1>
 
-        <form className="container-form">
+        <form className="container-form"
+          onSubmit={(event) => event.preventDefault()}>
 
           <button className="container-btn"
-          onClick={() => this.changeListState()}>
+          onClick={() => this.updateList()}>
           Volcanoes</button>
 
           <input className="container-input"
@@ -106,7 +132,7 @@ class VolcanList extends Component {
             className="container-item"
             key={volcan.key}
             onClick={() =>
-              console.log("yahayah")} >
+              this.handleMarker(volcan)}>
               {volcan.title}
             </li>
 
@@ -114,7 +140,7 @@ class VolcanList extends Component {
         }
       </ul>
       }
-      </div>
+    </section>
     )
   }
 }

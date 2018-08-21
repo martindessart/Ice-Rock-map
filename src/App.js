@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import fetchJsonp from 'fetch-jsonp';
 import VolcanList from './VolcanList';
 import Tumblr from './Tumblr';
 import * as volcanoes from './volcanoes.json';
@@ -23,10 +24,10 @@ class App extends Component {
   }
 
   initMap = () => {
+    let appComponent = this;
     const {island, markers} = this.state;
     console.log(island);
     console.log(markers);
-    var appComponent = this;
     var styles = [
       {
           "featureType": "all",
@@ -280,15 +281,14 @@ class App extends Component {
      this.setState({
        map
      });
-
-    for (var i = 0; i < island.length; i++) {
+    for (let i = 0; i < island.length; i++) {
       // Get the position from the "volcanoes" array from json file
-      var position = island[i].position;
-      var title = island[i].title;
-      var id = island[i].key;
-
+      let position = island[i].position;
+      let title = island[i].title;
+      //console.log(title);
+      let id = island[i].key;
       // Create a marker per location, and put into markers array.
-      var marker = new window.google.maps.Marker({
+      let marker = new window.google.maps.Marker({
         map: map,
         position: position,
         title: title,
@@ -299,9 +299,13 @@ class App extends Component {
 
       markers.push(marker);
 
-      marker.addListener('click', function(){
+      marker.addListener('click', function () {
+
         console.log(marker.title);
+        console.log(marker.position);
+        console.log(marker.id);
         console.log(this);
+        appComponent.displayIF(marker);
         //appComponent.this.closeIF(marker);
       })
 
@@ -310,19 +314,58 @@ class App extends Component {
 
 
 
-      marker.addListener('click', function(){
-        this.closeIF();
+      map.addListener('click', function () {
+        appComponent.closeIF();
       })
 
   }; //init map end
 
 
-  closeIF = (marker) => {
+  displayIF = (marker) => {
     this.setState({
-      infoWindowState: false,
+      infoWindowState: true,
+      selected: marker
+    });
+    this.tumblrInfo(marker);
+    console.log(marker);
+    console.log('open');
+  }
+
+  closeIF = () => {
+    this.setState({
+      infoWindowState:false,
       selected: {}
-    })
-    console.log('closed');
+    });
+  }
+
+  tumblrInfo = (marker) => {
+    let appComponent = this;
+    let location = marker.title;
+    //console.log(location);
+    let source =      'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=' +
+    location;
+    //console.log(source);
+    source = source.replace(/ /g, '%20');
+    //console.log(source);
+
+    fetchJsonp(source).then(function(resp) {
+      return resp.json();
+      //console.log(resp);
+    }).then(function(data) {
+      let pages = data.query.pages;
+      //console.log(pages);
+      let pageId = Object.keys(data.query.pages)[0];
+      //console.log(pageId);
+      let pageContent = pages[pageId].extract;
+      appComponent.setState({
+       contenu: pageContent
+     });
+   }).catch(function(err) {
+     let pageError = 'nothing fetched' + err;
+     appComponent.setState({
+       contenu: pageError
+     });
+   });
   }
 
 render() {
@@ -331,8 +374,14 @@ render() {
       <VolcanList
         volcano={this.state.island}
         markers={this.state.markers}
-        openIF={this.openIF}
+        displayIF={this.displayIF}
         />
+      {this.state.infoWindowState &&
+      <Tumblr
+      selected={this.state.selected}
+      contenu={this.state.contenu}
+      />
+  }
       <div id="map" role="application"></div>
     </div>
   )

@@ -1,20 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 
-class Tumblr extends Component {
-
-  render() {
-    //const {imgContent} = props;
+function Tumblr(props) {
+  const {selected, contenu } = props;
 
     return (
       <div className="tumblr-box">
         <article>
+          <p> Tumblr Illustration</p>
+          <h2>{selected.title}</h2>
+          {contenu}
         </article>
       </div>
     );
   }
-
-
-}
 
 export default Tumblr

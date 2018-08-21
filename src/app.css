@@ -1,3 +1,5 @@
+/* ------------ GENERAL ----------- */
+
 html,
 body {
   font-family: Arial, sans-serif;
@@ -6,13 +8,31 @@ body {
   padding: 0;
 }
 
+/* ------------ Volcan List ----------- */
+
 .container {
   height: 100%;
   position: relative;
 }
 
-input {
+.container-form {
+
+}
+
+.container-btn {
+
+}
+
+.container-input {
   font-size: 12px;
+}
+
+.container-list {
+
+}
+
+.container-item {
+
 }
 
 h1 {
@@ -22,10 +42,7 @@ h1 {
   text-align: left;
 }
 
-#hide-listings,
-#show-listings {
-  width: 100%;
-}
+/* ------------ App ----------- */
 
 #map {
   bottom:0px;
@@ -33,4 +50,10 @@ h1 {
   width:75%;
   position: absolute;
   right: 0px;
+}
+
+/* ------------ Tumblr ----------- */
+
+.tumblr-box {
+
 }
