@@ -20,8 +20,9 @@ The goal of this Udacity Project is to build a maps using React and some APIs.
 ## Dependencies
 - [npm & node.js](https://nodejs.org/en/)
 * [Create React App](https://github.com/facebookincubator/create-react-app)
-* [React Router DOM](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
 * [PropTypes](https://www.npmjs.com/package/prop-types)
+* [escapeRegExp](https://www.npmjs.com/package/lodash.escaperegexp)
+* [fetchJsonp](https://github.com/camsong/fetch-jsonp)
 
 ## Contributing
 
