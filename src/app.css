@@ -3,57 +3,108 @@
 html,
 body {
   font-family: Arial, sans-serif;
-  height: 100%;
   margin: 0;
   padding: 0;
+
 }
 
 /* ------------ Volcan List ----------- */
 
 .container {
-  height: 100%;
-  position: relative;
+  top: 50px;
+  left: 30px;
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  margin: 0.2em;
+  border-radius: 20px;
+
 }
 
 .container-form {
+  margin: 0.8em;
 
 }
 
 .container-btn {
+  margin-right: 5px;
+  margin-left: 0;
 
 }
 
 .container-input {
-  font-size: 12px;
+  font-size: 1em;
+  width: 150px;
+
 }
 
 .container-list {
+  border-style: groove;
+  margin: 0.3em;
+  padding: 10px 0 10px 50px;
 
 }
 
 .container-item {
+  margin: 0.2em;
 
 }
 
 h1 {
   color: #525454;
-  font-size: 18px;
+  font-size: 1.5em;
   margin: 0 0 10px 0;
-  text-align: left;
+  text-align: center;
+
 }
 
 /* ------------ App ----------- */
 
+.App {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
 #map {
   bottom:0px;
   height: 100%;
-  width:75%;
+  width:100%;
   position: absolute;
   right: 0px;
+
 }
 
-/* ------------ Tumblr ----------- */
+.list-section {
+  height: 50%;
+  width:25%;
 
-.tumblr-box {
+}
+
+/* ------------ wikipedia ----------- */
+
+.wikipedia-box {
+  z-index: 2;
+  right: 70px;
+  left: 20px;
+  position: absolute;
+  bottom: 70px;
+  background-color: white;
+  border-radius: 20px;
+
+}
+.wikipedia-title {
+  font-size: 1.5em;
+  margin: 0.5em;
+
+}
+
+.wikipedia-volcan {
+  margin: 0.5em;
+
+}
+
+aside {
+  margin: 0.3em;
 
 }

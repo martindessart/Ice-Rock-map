@@ -1,366 +1,107 @@
 import React, {Component} from 'react';
 import fetchJsonp from 'fetch-jsonp';
 import VolcanList from './VolcanList';
-import Tumblr from './Tumblr';
-import * as volcanoes from './volcanoes.json';
-
+import Wikipedia from './Wikipedia';
+import * as dataVolcan from './dataVolcan.json';
+import * as styles from './styles.json';
 
 class App extends Component {
-
+// initialize local state
   constructor(props) {
     super(props);
     this.state = {
       map: '',
       markers: [],
       selected:{},
-      island: volcanoes,
+      volcanoes: dataVolcan,
       infoWindowState: false,
       contenu: ''
     }
   }
+  // instantiate network request
   componentDidMount() {
     window.initMap = this.initMap;
     openGmap('https://maps.googleapis.com/maps/api/js?key=AIzaSyBjJdrQgRfSMEpE0_uW6ADz0DwPKoO_bEw&callback=initMap');
   }
-
+  //create map
   initMap = () => {
+    // keep the appComponent "this"
     let appComponent = this;
-    const {island, markers} = this.state;
-    console.log(island);
-    console.log(markers);
-    var styles = [
-      {
-          "featureType": "all",
-          "elementType": "geometry",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "all",
-          "elementType": "geometry.fill",
-          "stylers": [
-              {
-                  "color": "#ff0000"
-              },
-              {
-                  "saturation": "0"
-              }
-          ]
-      },
-      {
-          "featureType": "all",
-          "elementType": "labels.text",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "all",
-          "elementType": "labels.icon",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "administrative",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "color": "#444444"
-              }
-          ]
-      },
-      {
-          "featureType": "administrative.country",
-          "elementType": "geometry.stroke",
-          "stylers": [
-              {
-                  "visibility": "on"
-              }
-          ]
-      },
-      {
-          "featureType": "administrative.province",
-          "elementType": "geometry.fill",
-          "stylers": [
-              {
-                  "visibility": "on"
-              },
-              {
-                  "saturation": "-62"
-              },
-              {
-                  "color": "#ffffff"
-              }
-          ]
-      },
-      {
-          "featureType": "administrative.province",
-          "elementType": "geometry.stroke",
-          "stylers": [
-              {
-                  "visibility": "on"
-              },
-              {
-                  "color": "#000000"
-              },
-              {
-                  "weight": "1.53"
-              }
-          ]
-      },
-      {
-          "featureType": "landscape",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "color": "#f2f2f2"
-              }
-          ]
-      },
-      {
-          "featureType": "landscape",
-          "elementType": "geometry.fill",
-          "stylers": [
-              {
-                  "color": "#ffffff"
-              }
-          ]
-      },
-      {
-          "featureType": "landscape.man_made",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "landscape.natural.landcover",
-          "elementType": "geometry.fill",
-          "stylers": [
-              {
-                  "color": "#ff0000"
-              }
-          ]
-      },
-      {
-          "featureType": "poi",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "road",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "saturation": -100
-              },
-              {
-                  "lightness": 45
-              },
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "road",
-          "elementType": "geometry.stroke",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "road",
-          "elementType": "labels.text",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "road",
-          "elementType": "labels.icon",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "road.highway",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "road.highway",
-          "elementType": "labels",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "road.arterial",
-          "elementType": "labels.icon",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "transit",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "water",
-          "elementType": "all",
-          "stylers": [
-              {
-                  "color": "#000000"
-              },
-              {
-                  "visibility": "on"
-              }
-          ]
-      },
-      {
-          "featureType": "water",
-          "elementType": "geometry.fill",
-          "stylers": [
-              {
-                  "color": "#000000"
-              }
-          ]
-      },
-      {
-          "featureType": "water",
-          "elementType": "labels.icon",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      }
-    ]
-    // Constructor creates a new map
+    const {volcanoes, markers} = this.state;
+    // constructor creates a new map
     let map = new window.google.maps.Map(document.getElementById('map'), {
        zoom: 6,
-       center: {lat: 64.126, lng: -18.817},
+       center: {lat: 64.126, lng: -20.817},
+       // from src/styles.json
        styles: styles,
-       //mapTypeControl: false
+       // to add relief
+       mapTypeId: 'terrain',
+       mapTypeControl: false
      });
-
      this.setState({
        map
      });
-    for (let i = 0; i < island.length; i++) {
-      // Get the position from the "volcanoes" array from json file
-      let position = island[i].position;
-      let title = island[i].title;
-      //console.log(title);
-      let id = island[i].key;
-      // Create a marker per location, and put into markers array.
+     // loop over
+    for (let i = 0; i < volcanoes.length; i++) {
+      // get the position from the "dataVolcan" array from json file
+      let position = volcanoes[i].position;
+      let title = volcanoes[i].title;
+      let id = volcanoes[i].key;
+      // one marker per location, and put into markers array
       let marker = new window.google.maps.Marker({
         map: map,
         position: position,
         title: title,
         animation: window.google.maps.Animation.DROP,
-        //icon: defaultIcon,
         id: id
       });
-
       markers.push(marker);
-
+      // create a click event to open the wikipedia page when click on the appropriate marker
       marker.addListener('click', function () {
-
-        console.log(marker.title);
-        console.log(marker.position);
-        console.log(marker.id);
-        console.log(this);
         appComponent.displayIF(marker);
-        //appComponent.this.closeIF(marker);
       })
-
-
     } //for loop end
-
-
-
+      //create a click event that close the wikipedia page when click anywhere on the map
       map.addListener('click', function () {
         appComponent.closeIF();
-      })
-
+      });
   }; //init map end
-
-
+  //open wikipedia page and send info to wikipediaInfo function
   displayIF = (marker) => {
     this.setState({
       infoWindowState: true,
       selected: marker
     });
-    this.tumblrInfo(marker);
-    console.log(marker);
-    console.log('open');
+    this.wikipediaInfo(marker);
   }
-
+  //close the wikipedia page
   closeIF = () => {
     this.setState({
       infoWindowState:false,
       selected: {}
     });
   }
-
-  tumblrInfo = (marker) => {
+  //fetch info from wikipedia
+  wikipediaInfo = (marker) => {
     let appComponent = this;
     let location = marker.title;
     //console.log(location);
+    //create the source and add the name of the volcano
     let source =      'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=' +
     location;
-    //console.log(source);
-    source = source.replace(/ /g, '%20');
-    //console.log(source);
-
+    //fetch the response under the format json
     fetchJsonp(source).then(function(resp) {
       return resp.json();
-      //console.log(resp);
     }).then(function(data) {
+      //extract the content
       let pages = data.query.pages;
-      //console.log(pages);
       let pageId = Object.keys(data.query.pages)[0];
-      //console.log(pageId);
       let pageContent = pages[pageId].extract;
       appComponent.setState({
        contenu: pageContent
      });
    }).catch(function(err) {
+     //handle error
      let pageError = 'nothing fetched' + err;
      appComponent.setState({
        contenu: pageError
@@ -368,27 +109,27 @@ class App extends Component {
    });
   }
 
-render() {
-  return (
-    <div className="App">
-      <VolcanList
-        volcano={this.state.island}
-        markers={this.state.markers}
-        displayIF={this.displayIF}
+  render() {
+    return (
+      <div className="App">
+        <section className="list-section">
+        <VolcanList
+          volcano={this.state.volcanoes}
+          markers={this.state.markers}
+          displayIF={this.displayIF}
+          />
+        {this.state.infoWindowState &&
+        <Wikipedia
+        selected={this.state.selected}
+        contenu={this.state.contenu}
         />
-      {this.state.infoWindowState &&
-      <Tumblr
-      selected={this.state.selected}
-      contenu={this.state.contenu}
-      />
+    }
+    </section>
+        <div id="map" role="application"></div>
+        </div>
+      )
+    }
   }
-      <div id="map" role="application"></div>
-    </div>
-  )
-}
-
-}
-
 
 function openGmap(source) {
   var ref = window.document.getElementsByTagName('script')[0];

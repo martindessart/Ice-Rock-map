@@ -1,0 +1,116 @@
+[
+  {
+    "key": "A",
+    "name": "Eyj",
+    "title": "Eyjafjallajökull",
+    "position": {"lat": 63.63040460000001, "lng": -19.606733299999973}
+  },
+  {
+    "key": "B",
+    "name": "Kat",
+    "title": "Katla (volcano)",
+    "position": {"lat": 63.6467299, "lng": -19.130284699999947}
+  },
+  {
+    "key": "C",
+    "name": "Hve",
+    "title": "Hverfjall",
+    "position": {"lat": 65.60861109999999, "lng": -16.87166669999999}
+  },
+  {
+    "key": "D",
+    "name": "Ker",
+    "title": "Kerlingarfjöll",
+    "position": {"lat": 64.6365932, "lng": -19.26943959999994}
+  },
+  {
+    "key": "E",
+    "name": "Ora",
+    "title": "Öræfajökull",
+    "position": {"lat": 63.98217380000001, "lng": -16.653642799999943}
+  },
+  {
+    "key": "F",
+    "name": "Gri",
+    "title": "Grímsnes",
+    "position": {"lat": 64.033333, "lng": -20.866667000000007}
+  },
+  {
+    "key": "G",
+    "name": "Eld",
+    "title": "Eldfell",
+    "position": {"lat": 63.4325, "lng": -20.247499999999945}
+  },
+  {
+    "key": "H",
+    "name": "Sna",
+    "title": "Snæfellsjökull",
+    "position": {"lat": 64.8057023, "lng": -23.77309660000003}
+  },
+  {
+    "key": "I",
+    "name": "Gri",
+    "title": "Grímsvötn",
+    "position": {"lat": 64.41668349999999, "lng": -17.322181199999932}
+  },
+  {
+    "key": "J",
+    "name": "Tor",
+    "title": "Torfajökull",
+    "position": {"lat": 63.916667, "lng": -19.16666699999996}
+  },
+  {
+    "key": "K",
+    "name": "Her",
+    "title": "Herðubreið",
+    "position": {"lat": 65.1738889, "lng": -16.34305560000007}
+  },
+  {
+    "key": "L",
+    "name": "Ask",
+    "title": "Askja",
+    "position": {"lat": 65.01105369999999, "lng": -16.748527500000023}
+  },
+  {
+    "key": "M",
+    "name": "Esj",
+    "title": "Esjufjöll",
+    "position": {"lat": 64.27, "lng": -16.649999999999977}
+  },
+  {
+    "key": "N",
+    "name": "Eld",
+    "title": "Eldgjá",
+    "position": {"lat": 63.9663704, "lng": -18.608227299999953}
+  },
+  {
+    "key": "O",
+    "name": "Hek",
+    "title": "Hekla",
+    "position": {"lat": 63.99226069999999, "lng": -19.66581480000002}
+  },
+  {
+    "key": "P",
+    "name": "Hen",
+    "title": "Hengill",
+    "position": {"lat": 64.18333299999999, "lng": -21.33333300000004}
+  },
+  {
+    "key": "Q",
+    "name": "Skj",
+    "title": "Skjaldbreiður",
+    "position": {"lat": 64.40923049999999, "lng": -20.752530200000024}
+  },
+  {
+    "key": "R",
+    "name": "Pre",
+    "title": "Prestahnúkur",
+    "position": {"lat": 64.5861848, "lng": -20.672235399999977}
+  },
+  {
+    "key": "S",
+    "name": "Bau",
+    "title": "Baula",
+    "position": {"lat": 64.8504197, "lng": -21.438741499999992}
+  }
+]
