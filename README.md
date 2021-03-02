@@ -1,8 +1,7 @@
 # Neighborhood Project
 
 Project n°8 of Udacity FEND
-The goal of this Udacity Project is to build a maps using React and some APIs.
-
+The goal of this Udacity Project is to build a map using React and some APIs.
 
 ## To get started & modify my project:
 
@@ -14,7 +13,7 @@ The goal of this Udacity Project is to build a maps using React and some APIs.
 ## Technologies used
 
 - Javascript and JSX
-- css3
+- CSS3
 - HTML5
 
 ## Dependencies
